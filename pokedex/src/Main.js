@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Link,
+  NavLink,
 } from "react-router-dom";
 import PokecardList from "./Pokecard_List";
-import PagelinksList from './Pagelinks_List';
+import PagelinksList from "./Pagelinks_List";
 const axios = require("axios");
+
  
 class Main extends Component {
   constructor(props){
-    super(props);
+  super(props);
     this.state = { 
       pokemon: [],
       selectedPage: 1,
@@ -18,33 +19,44 @@ class Main extends Component {
       pageInfo: null
     };
 
+    getPokemon.call(this);
 
-    axios.get(`${this.state.url}`)
-      .then(({ data }) => {
-        console.log(data.meta);
-        this.setState({ 
-          pokemon: data.data,
-          selectedPage: data.meta.current_page,
-          pageInfo: data.meta
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-      })
   }
 
   render() {
     return (
         <Router>
           <div>
-            <h1>Pokedex</h1>
-
-            <PokecardList pokemon={this.state.pokemon} />
-            <PagelinksList pageInfo={this.state.pageInfo} />
+            <div> {/*Content from route displayed*/}
+              <h1>Pokedex</h1>
+              {/*<Route path="/:pokemonPage" render={({ match }) => (
+                <PokecardList pokemon={this.state.pokemon} />
+              )} />*/}
+              <PokecardList pokemon={this.state.pokemon} />*/
+            </div>
+            <div> {/*Links go here*/}
+              <PagelinksList pageInfo={this.state.pageInfo} />
+            </div>
           </div>
         </Router>
     );
   }
+}
+
+//put into another file
+function getPokemon(){
+  axios.get(`${this.state.url}`)
+  .then(({ data }) => {
+    this.setState({ 
+      pokemon: data.data,
+      selectedPage: data.meta.current_page,
+      url: `https://intern-pokedex.myriadapps.com/api/v1/pokemon?page=${this.selectedPage}`,
+      pageInfo: data.meta
+      });
+  })
+  .catch((error) => {
+    console.log(error);
+  })
 }
  
 export default Main;
