@@ -20,7 +20,6 @@ class Main extends Component {
     };
 
     getPokemon.call(this);
-
   }
 
   render() {
