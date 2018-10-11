@@ -26,3 +26,10 @@ There are no styles yet, but I will create a grid system for the PokecardList us
   ...~100% for mobile
 
 After that, I will style as I see fit for links and displaying indivdual pokemon.
+
+
+Issues so far:
+
+  ...I am trying to figure out the best way to render the route. My potential solution is to click the NavLink, update state of "selectedPage" to be the pageNumber, and then make an API request using getPokemon method. 
+  
+  ...I might change the display from a grid layout out of pokemon (3 horizontal by 5 vertical) to having them all stacked vertically with more details displayed at the right of the image. 
