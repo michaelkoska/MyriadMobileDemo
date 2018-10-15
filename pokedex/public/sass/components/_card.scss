@@ -1,0 +1,22 @@
+.card {
+	position: relative;
+	height: 18rem;
+	align-items: stretch;
+	border: .2rem solid #555;
+	border-radius: .8rem;
+	margin: 1rem;
+	background-color: #fff;
+	text-align: center;
+
+	.picture {
+		height: 85%;
+	}
+
+	.heading {
+		font-size: 1.8rem;
+		font-weight: 300;
+		text-transform: uppercase;
+		width: 95%;
+		margin: auto;
+	}
+}

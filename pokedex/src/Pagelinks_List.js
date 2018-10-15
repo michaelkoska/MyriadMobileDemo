@@ -1,7 +1,7 @@
 import React from 'react';
 import Pagelinks from './Pagelinks';
 
-const PagelinksList = ({pageInfo}) => {
+const PagelinksList = ({pageInfo, onPageSelect}) => {
 	if(!pageInfo){
 		return <div>Loading...</div>
 	}
@@ -10,11 +10,10 @@ const PagelinksList = ({pageInfo}) => {
 	//could be revisited to find out if there's time
 	function createPages() {
 		for(let i = 1; i <= pageInfo.last_page; i++){
-			links.push(<Pagelinks key={i} pageNumber={i} />);
+			links.push(<Pagelinks onPageSelect={onPageSelect} key={i} pageNumber={i} />);
 		}
 	}
 	createPages();
-	console.log(links);
 	return (
 		<div>
 			{links}

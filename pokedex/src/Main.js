@@ -11,13 +11,13 @@ const axios = require("axios");
  
 class Main extends Component {
   constructor(props){
-  super(props);
-    this.state = { 
-      pokemon: [],
-      selectedPage: 1,
-      url: `https://intern-pokedex.myriadapps.com/api/v1/pokemon?page=${this.selectedPage}`,
-      pageInfo: null
-    };
+  	super(props);
+	    this.state = { 
+	      pokemon: [],
+	      selectedPage: null,
+	      url: `https://intern-pokedex.myriadapps.com/api/v1/pokemon?page=1`,
+	      pageInfo: null
+	    };
 
     getPokemon.call(this);
   }
@@ -26,15 +26,20 @@ class Main extends Component {
     return (
         <Router>
           <div>
-            <div> {/*Content from route displayed*/}
+            <div>
               <h1>Pokedex</h1>
-              {/*<Route path="/:pokemonPage" render={({ match }) => (
-                <PokecardList pokemon={this.state.pokemon} />
-              )} />*/}
-              <PokecardList pokemon={this.state.pokemon} />*/
+              <PokecardList pokemon={this.state.pokemon} />
             </div>
-            <div> {/*Links go here*/}
-              <PagelinksList pageInfo={this.state.pageInfo} />
+            <div>
+              <PagelinksList 
+              	onPageSelect={(selectedPage) => {
+              		this.setState({
+              			selectedPage: selectedPage,
+              			url:`https://intern-pokedex.myriadapps.com/api/v1/pokemon?page=${selectedPage}`
+              		})} 
+              	}
+              	pageInfo={this.state.pageInfo} 
+              />
             </div>
           </div>
         </Router>
@@ -49,7 +54,6 @@ function getPokemon(){
     this.setState({ 
       pokemon: data.data,
       selectedPage: data.meta.current_page,
-      url: `https://intern-pokedex.myriadapps.com/api/v1/pokemon?page=${this.selectedPage}`,
       pageInfo: data.meta
       });
   })

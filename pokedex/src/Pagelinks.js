@@ -8,7 +8,9 @@ import {
 const Pagelinks = (props) => {
 
 	return(
-		<li><NavLink to={`/${props.pageNumber}`}>{props.pageNumber}</NavLink></li>
+		<li onClick={() => props.onPageSelect(props.pageNumber)}>
+			<NavLink to={`/${props.pageNumber}`}>{props.pageNumber}</NavLink>
+		</li>
 	)
 }
 

@@ -1,0 +1,10 @@
+.pokecard__container{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+@media (max-width: 414px) {
+	.pokecard__container{
+		flex-direction: column;
+	}
+}

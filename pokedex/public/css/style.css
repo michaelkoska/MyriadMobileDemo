@@ -6,7 +6,8 @@
   box-sizing: inherit; }
 
 html {
-  font-size: 100%; }
+  font-size: 62.5%;
+  background-color: #eee; }
 
 body {
   font-family: sans-serif;
@@ -14,3 +15,29 @@ body {
   line-height: 1.7;
   padding: 3rem;
   box-sizing: border-box; }
+
+.card {
+  position: relative;
+  height: 18rem;
+  align-items: stretch;
+  border: .2rem solid #555;
+  border-radius: .8rem;
+  margin: 1rem;
+  background-color: #fff;
+  text-align: center; }
+  .card .picture {
+    height: 85%; }
+  .card .heading {
+    font-size: 1.8rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    width: 95%;
+    margin: auto; }
+
+.pokecard__container {
+  display: flex;
+  flex-wrap: wrap; }
+
+@media (max-width: 414px) {
+  .pokecard__container {
+    flex-direction: column; } }
