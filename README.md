@@ -17,6 +17,9 @@ PokecardList will be similar to PagelinksList
 
   ...When a pokemon is clicked, it will route the specific Pokemon (this shouldn't require a new "get" request)
   ...I am thinking a componenent will render the Pokemon on top of the PokecardList
+
+SearchBar component needs to be created
+  ...Prevent default, maybe find a spot in the Main state and update it to display pokemon that is retrieved from API request
   
 There are no styles yet, but I will create a grid system for the PokecardList using:
 
