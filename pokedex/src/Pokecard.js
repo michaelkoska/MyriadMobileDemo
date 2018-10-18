@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Pokecard = ({pokemon}) => {
-	console.log({pokemon})
 	let card="card";
 	let heading="heading";
 	let picture="picture";

@@ -1,0 +1,20 @@
+#heading--main{
+	color: $color-white;
+	text-transform: uppercase;
+	display: block;
+	font-size: 6rem;
+	text-shadow: 1px 1px 1px #222;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+	h1{
+		letter-spacing: 0.5rem;
+	}
+
+	h3{
+		letter-spacing: 0.2rem;
+	}
+}

@@ -19,7 +19,7 @@ class Main extends Component {
 	      pageInfo: null
 	    };
 
-    getPokemon.call(this);
+    getPokemon.call(this)
   }
 
   render() {
@@ -27,18 +27,26 @@ class Main extends Component {
         <Router>
           <div>
             <div>
-              <h1>Pokedex</h1>
               <PokecardList pokemon={this.state.pokemon} />
             </div>
             <div>
               <PagelinksList 
               	onPageSelect={(selectedPage) => {
-              		this.setState({
-              			selectedPage: selectedPage,
-              			url:`https://intern-pokedex.myriadapps.com/api/v1/pokemon?page=${selectedPage}`
-              		})} 
+                  let url = `https://intern-pokedex.myriadapps.com/api/v1/pokemon?page=${selectedPage}`;
+                  axios.get(url)
+                    .then(({data}) =>{
+                      this.setState({
+                        selectedPage: selectedPage,
+                        url: url,
+                        pokemon: data.data
+                      });
+                    })
+                    .catch((error) => {
+                      console.log(error)
+                    });
+                  }
               	}
-              	pageInfo={this.state.pageInfo} 
+              	pageInfo={this.state.pageInfo}
               />
             </div>
           </div>
@@ -55,11 +63,12 @@ function getPokemon(){
       pokemon: data.data,
       selectedPage: data.meta.current_page,
       pageInfo: data.meta
-      });
+    });
   })
   .catch((error) => {
     console.log(error);
   })
 }
+
  
 export default Main;
