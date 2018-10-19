@@ -24,3 +24,7 @@ SearchBar component needs to be created
 There are no styles yet, but I will create a grid system for the PokecardList using:
 
   ...Links need styles, I need to make sure everything is responsive
+
+
+
+Image from Echo Grid at Unsplash
