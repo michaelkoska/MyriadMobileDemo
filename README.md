@@ -25,6 +25,9 @@ There are no styles yet, but I will create a grid system for the PokecardList us
 
   ...Links need styles, I need to make sure everything is responsive
 
+The navigation buttons (back and forward) do not work....routing overall needs work.
+  ...I will have to look into React Router more.
+  ...As of now, I will finish making the PokecardInfo portion (which will display selected Pokemon and info) and then work on the searchbar or routing next.
 
 
 Image from Echo Grid at Unsplash
