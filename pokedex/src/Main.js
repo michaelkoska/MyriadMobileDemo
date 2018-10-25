@@ -15,7 +15,7 @@ class Main extends Component {
 	    this.state = { 
 	      pokemon: [],
 	      selectedPage: null,
-	      url: `https://intern-pokedex.myriadapps.com/api/v1/pokemon?page=1`,
+	      url: `https://intern-pokedex.myriadapps.com/api/v1/pokemon?page=`,
 	      pageInfo: null
 	    };
 
@@ -26,26 +26,28 @@ class Main extends Component {
     return (
         <Router>
           <div>
-            <div>
-              <PokecardList pokemon={this.state.pokemon} />
-            </div>
+            <Route 
+              path="/:id" 
+              render={(props) => <PokecardList 
+              pokemon={this.state.pokemon} 
+              updatePokemon={() => {
+                axios.get(`${this.state.url}${props.match.params.id}`)
+                  .then(({ data }) => {
+                    this.setState({
+                      pokemon: data.data,
+                      selectedPage: props.match.params.id
+                    })
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  })
+              }}
+              {...props} 
+              />} 
+            />
             <div>
               <PagelinksList 
-              	onPageSelect={(selectedPage) => {
-                  let url = `https://intern-pokedex.myriadapps.com/api/v1/pokemon?page=${selectedPage}`;
-                  axios.get(url)
-                    .then(({data}) =>{
-                      this.setState({
-                        selectedPage: selectedPage,
-                        url: url,
-                        pokemon: data.data
-                      });
-                    })
-                    .catch((error) => {
-                      console.log(error)
-                    });
-                  }
-              	}
+              	
               	pageInfo={this.state.pageInfo}
               />
             </div>
@@ -70,5 +72,31 @@ function getPokemon(){
   })
 }
 
+function getPokecardInfo(){
+  axios.get()
+    .then(({data}) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+}
+
+/*onPageSelect={(selectedPage) => {
+                  let url = `https://intern-pokedex.myriadapps.com/api/v1/pokemon?page=${selectedPage}`;
+                  axios.get(url)
+                    .then(({data}) =>{
+                      this.setState({
+                        selectedPage: selectedPage,
+                        url: url,
+                        pokemon: data.data
+                      });
+                    })
+                    .catch((error) => {
+                      console.log(error)
+                    });
+                  }
+                }
+*/
  
 export default Main;
