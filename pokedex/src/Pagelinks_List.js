@@ -10,7 +10,7 @@ const PagelinksList = ({pageInfo, onPageSelect}) => {
 	//could be revisited to find out if there's time
 	function createPages() {
 		for(let i = 1; i <= pageInfo.last_page; i++){
-			links.push(<Pagelinks onPageSelect={onPageSelect} key={i} pageNumber={i} />);
+			links.push(<Pagelinks  key={i} pageNumber={i} />);
 		}
 	}
 	createPages();
