@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import {
   BrowserRouter as Router,
-  Route,
-  NavLink,
+  Route
 } from "react-router-dom";
 import PokecardList from "./Pokecard_List";
 import PagelinksList from "./Pagelinks_List";
+import PokecardInfo from "./Pokecard_Info";
+
 const axios = require("axios");
 
  
@@ -15,10 +16,15 @@ class Main extends Component {
 	    this.state = { 
 	      pokemon: [],
 	      selectedPage: null,
-	      url: `https://intern-pokedex.myriadapps.com/api/v1/pokemon?page=`,
-	      pageInfo: null
+	      url: `https://intern-pokedex.myriadapps.com/api/v1/pokemon`,
+	      pageInfo: null,
+        selectedPokemon: null
 	    };
 
+    
+  }
+
+  componentDidMount(){
     getPokemon.call(this)
   }
 
@@ -26,12 +32,31 @@ class Main extends Component {
     return (
         <Router>
           <div>
+            <Route
+              path="/:id/:pokemonId/"
+              render={(props) => <PokecardInfo
+              selectedPokemon={this.state.selectedPokemon}
+              findPokemonById={() => {
+                axios.get(`${this.state.url}?name=${props.match.params.pokemonId}`)
+                  .then(({ data }) => {
+                    this.setState({
+                      selectedPokemon: data.data
+                    })
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  })
+              }}
+              {...props}
+              />}
+            />
             <Route 
-              path="/:id" 
-              render={(props) => <PokecardList 
+              path="/:id/" 
+              render={(props) => <PokecardList
+              selectedPage={this.state.selectedPage} 
               pokemon={this.state.pokemon} 
               updatePokemon={() => {
-                axios.get(`${this.state.url}${props.match.params.id}`)
+                axios.get(`${this.state.url}?page=${props.match.params.id}`)
                   .then(({ data }) => {
                     this.setState({
                       pokemon: data.data,
@@ -41,7 +66,7 @@ class Main extends Component {
                   .catch((error) => {
                     console.log(error);
                   })
-              }}
+                }}
               {...props} 
               />} 
             />
@@ -64,7 +89,8 @@ function getPokemon(){
     this.setState({ 
       pokemon: data.data,
       selectedPage: data.meta.current_page,
-      pageInfo: data.meta
+      pageInfo: data.meta,
+      url: `https://intern-pokedex.myriadapps.com/api/v1/pokemon`
     });
   })
   .catch((error) => {
@@ -72,7 +98,7 @@ function getPokemon(){
   })
 }
 
-function getPokecardInfo(){
+/*function getPokecardInfo(){
   axios.get()
     .then(({data}) => {
       console.log(data);
@@ -80,7 +106,7 @@ function getPokecardInfo(){
     .catch((error) => {
       console.log(error);
     })
-}
+}*/
 
 /*onPageSelect={(selectedPage) => {
                   let url = `https://intern-pokedex.myriadapps.com/api/v1/pokemon?page=${selectedPage}`;
