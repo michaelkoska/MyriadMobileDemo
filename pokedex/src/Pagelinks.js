@@ -1,15 +1,16 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  NavLink,
-} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Pagelinks = (props) => {
 
 	return(
-		<li >
-			<NavLink to={`/${props.pageNumber}`}>{props.pageNumber}</NavLink>
+		<li>
+			<NavLink 
+				page-tag={props.pageNumber}
+				onClick={props.onClick} 
+				to={`/page/${props.pageNumber}`}>
+					{props.pageNumber}
+			</NavLink>
 		</li>
 	)
 }

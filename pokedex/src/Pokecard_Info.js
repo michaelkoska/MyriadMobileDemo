@@ -1,24 +1,17 @@
 import React from 'react';
 
 const PokecardInfo = (props) => {
-	console.log(props.selectedPokemon);
-	if(props.selectedPokemon){
-		if(props.match.params.pokemonId !== props.selectedPokemon[0].name){
-			props.findPokemonById();
-		}
-	}
-
-	
-
+	console.log(props)
 	if(!props.selectedPokemon){
 		return<div>Loading...</div>
 	}
-	var [pokemon] = props.selectedPokemon;
+	/*var [pokemon] = props.selectedPokemon;*/
 
 
 	return(
 		<div>
-			<h2>{pokemon.id}</h2>
+			<h2>{props.selectedPokemon}</h2>
+			<img src={props.selectedImage} alt={props.selectedPokemon}/>
 			<h3>I choose you!</h3>
 		</div>
 	);
