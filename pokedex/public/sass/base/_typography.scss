@@ -1,4 +1,4 @@
-#heading--main{
+.heading--main{
 	color: $color-white;
 	text-transform: uppercase;
 	display: block;
@@ -17,4 +17,9 @@
 	h3{
 		letter-spacing: 0.2rem;
 	}
+
+	@include respond(phone) {
+        font-size: 2rem;
+        text-shadow: .5px .5px .5px #222;
+    }
 }

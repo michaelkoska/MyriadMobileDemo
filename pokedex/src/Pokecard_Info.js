@@ -6,13 +6,21 @@ const PokecardInfo = (props) => {
 		return<div>Loading...</div>
 	}
 	/*var [pokemon] = props.selectedPokemon;*/
+	const types = props.selectedTypes.map((type, i) => {
+		return <li key={i}>{type}</li>
+	})
 
-
+	const card = "card__single";
+	const cardTitle = "card__title";
+	const cardPicture = "card__picture";
+	const cardType = "card__type"
 	return(
-		<div>
-			<h2>{props.selectedPokemon}</h2>
-			<img src={props.selectedImage} alt={props.selectedPokemon}/>
-			<h3>I choose you!</h3>
+		<div className={card}>
+			<h2 className={cardTitle}>#{props.selectedPokemonId} {props.selectedPokemon}</h2>
+			<img className={cardPicture} src={props.selectedImage} alt={props.selectedPokemon}/>
+			<div className={cardType}>
+			TYPE:{types}
+			</div>
 		</div>
 	);
 };

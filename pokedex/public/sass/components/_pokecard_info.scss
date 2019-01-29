@@ -1,0 +1,25 @@
+.card__single {
+	background-color: #FFF;
+	height: 75vh;
+	width: 75%;
+	text-align: center;
+	position: relative;
+	border: .5rem solid #000;
+	border-radius: 1rem;
+	margin: 2rem auto;
+
+
+	.card__title {
+		font-size: 3rem;
+	}
+
+	.card__picture {
+		height: 65%;
+		width: 90%;
+	}
+
+	.card__type {
+		font-size: 1.5rem;
+		text-transform: uppercase;
+	}
+}

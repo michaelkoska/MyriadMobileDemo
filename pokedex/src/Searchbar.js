@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {
   BrowserRouter as Router,
-  Route,
-  Redirect,
   withRouter
 } from "react-router-dom";
 
@@ -14,18 +12,22 @@ class Searchbar extends Component {
 	}
 
 	onFormSubmit = event => {
+		/*const pokemon = event.target.getAttribute('search-tag')*/
 		event.preventDefault();
-		const pokemon = event.target.value;
-		this.props.searchPokemon(pokemon)
-		this.props.history.push("/pokemon/pikachu")
+		console.log(this.state.term)
+		this.props.searchPokemon(this.state.term)
+
+		this.props.history.push(`/pokemon/${this.state.term}`)
 	}
 
 	render(){
+		const searchbar = "searchbar";
+		const formControl = "form__control"
 		return(
-		<div>
-			<form onSubmit={this.onFormSubmit} >
+		<div className={formControl}>
+			<form className={searchbar} onSubmit={this.onFormSubmit} >
 				<label>Pokemon Search</label>
-				<input
+				<input className={searchbar}
 					type="text"
 					value={this.state.term}
 					onChange={this.onInputChange}

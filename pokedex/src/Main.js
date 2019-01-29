@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import {
   BrowserRouter as Router,
-  Route,
-  Redirect,
-  withRouter
+  Route
 } from "react-router-dom";
 import PokecardList from "./Pokecard_List";
 import PagelinksList from "./Pagelinks_List";
 import PokecardInfo from "./Pokecard_Info";
 import Searchbar from "./Searchbar";
+import Header from "./Header";
 import axios from "axios";
 
 const url = 'https://intern-pokedex.myriadapps.com/api/v1/pokemon';
@@ -22,8 +21,11 @@ class Main extends Component {
 	      selectedPage: null,
 	      pageInfo: null,
         selectedPokemon: null,
-        selectedImage: null
-	    };  
+        selectedImage: null,
+        selectedPokemonId: null,
+        selectedPokemonType: []
+	    };
+      this.pokemonHandler = this.pokemonHandler.bind(this);
   }
 
   //update pokemone list and used in "/page/:id" route
@@ -52,24 +54,20 @@ class Main extends Component {
   }
 
   pokemonHandler = async pokemon => {
-    /*console.log(pokemon)*/
     const response = await axios.get(url, {
       params: {
         name: pokemon
       }
     })
-    /*console.log(response.data.data[0]);*/
+    console.log(response.data.data[0]);
     this.setState({
       selectedPokemon: response.data.data[0].name,
-      selectedImage: response.data.data[0].image
+      selectedImage: response.data.data[0].image,
+      selectedPokemonId: response.data.data[0].id,
+      selectedPokemonType: response.data.data[0].types
     })
   }
 
-  /*onTermSubmit = term => {
-    
-    this.pokemonHandler(term);
-    
-  }*/
 
 
 //=====================LIFE CYCLE
@@ -84,11 +82,12 @@ class Main extends Component {
 
 
   render() {
+    const linksDiv = "links__div";
     return (
         <Router>
           <div>
-            <Searchbar 
-              onFormSubmit={this.onTermSubmit}
+            <Header />
+            <Searchbar               
               searchPokemon={this.pokemonHandler}
             />
             <Route
@@ -98,6 +97,8 @@ class Main extends Component {
               updateSinglePokemon={this.pokemonHandler(props.match.params.pokemonId)}
               selectedPokemon={this.state.selectedPokemon}
               selectedImage={this.state.selectedImage}
+              selectedTypes={this.state.selectedPokemonType}
+              selectedPokemonId={this.state.selectedPokemonId}
               {...props}
               />}
             />
@@ -110,7 +111,7 @@ class Main extends Component {
               {...props} 
               />} 
             />
-            <div>
+            <div className={linksDiv}>
               <PagelinksList 
               	onClick={this.pageHandler}
               	pageInfo={this.state.pageInfo}

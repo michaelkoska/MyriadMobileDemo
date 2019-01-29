@@ -5,7 +5,6 @@ const PagelinksList = ({pageInfo, onPageSelect, onClick}) => {
 	if(!pageInfo){
 		return <div>Loading...</div>
 	}
-
 	const links = [];
 	//I'm not sure of a better way to iterate over this, but I feel like it
 	//could be revisited to find out if there's time
@@ -17,7 +16,9 @@ const PagelinksList = ({pageInfo, onPageSelect, onClick}) => {
 	createPages();
 	return (
 		<div>
+			<li>
 			{links}
+			</li>
 		</div>
 	)
 }
